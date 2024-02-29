@@ -1,0 +1,35 @@
+const username = document.getElementById('registerUsername').value;
+                        const password = document.getElementById('registerPassword').value;
+                        const nickname = document.getElementById('registerNickname').value;
+                        const fullname = document.getElementById('registerFullname').value;
+                        const email = document.getElementById('registerEmail').value;
+                        const phone = document.getElementById('registerPhone').value;
+                        console.log(username, password, nickname, fullname, email, phone)
+
+                        fetch('/user/signup', {
+                            method: 'POST',
+                            headers: {
+                                'Content-Type': 'application/json'
+                            },
+                            body: JSON.stringify({
+                                userId: username,
+                                password: password,
+                                nickName: nickname,
+                                name: fullname,
+                                email: email,
+                                phone: phone
+                            })
+                        })
+                            .then(response => response.json())
+                            .then(data => {
+                                if (data.status === "success") {
+                                    $('#registerModal').modal('hide');
+                                    $('#loginModal').modal('show');
+                                    }
+                                else {
+                                    alert('Register failed');
+                                }
+                            })
+                            .catch(error => {
+                                // Handle network errors
+                            });
