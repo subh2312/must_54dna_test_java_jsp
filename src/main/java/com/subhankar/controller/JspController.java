@@ -16,5 +16,9 @@ public class JspController {
         return "welcome";
     }
 
+    @GetMapping({"/favicon.ico"})
+    public void favicon() {
+        // do nothing
+    }
 
 }
