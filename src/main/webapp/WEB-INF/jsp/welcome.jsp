@@ -439,7 +439,7 @@
                                             // Handle network errors
                                         });
                                 } else {
-                                    alert('OTP verification failed');
+                                    alert('OTP verification failed :', data.message);
                                 }
                             })
                             .catch(error => {

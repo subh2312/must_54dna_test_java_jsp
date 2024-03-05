@@ -50,15 +50,18 @@ public class OtpServiceImpl implements OtpService {
 
     @Override
     public ResponseEntity<Result> validateOTP(Integer otp) {
-        Integer otpFromCache = otpCache.getIfPresent(key);
-        boolean flag= otpFromCache != null && otpFromCache.equals(otp);
-        if(flag){
-            clearOTPFromCache();
-            return ResponseEntity.ok(Result.builder().status("success").message("OTP validated successfully").build());
+        try{
+            Integer otpFromCache = otpCache.getIfPresent(key);
+            boolean flag= otpFromCache != null && otpFromCache.equals(otp);
+            if(flag){
+                clearOTPFromCache();
+                return ResponseEntity.ok(Result.builder().status("success").message("OTP validated successfully").build());
+            }
+
+        }catch (Exception e){
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(Result.builder().status("error").message(e.getMessage()).build());
         }
-
-        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(Result.builder().status("error").message("OTP is invalid or expired").build());
-
+        return null;
     }
 
     @Override
