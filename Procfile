@@ -1,0 +1,1 @@
+web: java $JAVA_OPTS -jar target/Must_54DNAType-3.0.5.war
